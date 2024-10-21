@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro de Dudas - Pamer</title>
+    <style>
+        body {
+            background-color: #3C57F7;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        .usuario-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .usuario-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            width: 80%;
+            margin: auto;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .post {
+            background-color: #2a2a2a;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .respuesta {
+            background-color: #2a2a2a; 
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .perfil {
+            display: flex;
+            align-items: center;
+        }
+        .perfil img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .pregunta {
+            margin: 10px 0;
+        }
+        .votos {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .boton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .boton-pequeño {
+            width: 25px;
+            height: 25px;
+            padding: 0;
+        }
+        .respuesta-input {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border-radius: 5px;
+        }
+        .respuesta-input textarea {
+            width: 100%;
+            height: 60px;
+            margin-top: 5px;
+            border-radius: 3px;
+            background: #2a2a2a;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Foro de Dudas</h1>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('matematicas')">Matemáticas</a></li>
+            <li><a href="#" onclick="showSection('comunicacion')">Comunicación</a></li>
+            <li><a href="#" onclick="showSection('sociales')">Sociales</a></li>
+            <li><a href="#" onclick="showSection('ingles')">Inglés</a></li>
+            <li><a href="#" onclick="showSection('ciencias')">Ciencias</a></li>
+            <li><a href="#" onclick="showSection('bugs')">Bugs</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="matematicas" class="active">
+    <h2>Matemáticas</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 1</strong><br>
+                Rango: Alumno estrella (XP: 650, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">¿Cómo se resuelve una ecuación cuadrática?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">5</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">2</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<main id="comunicacion">
+    <h2>Comunicación</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 2</strong><br>
+                Rango: Alumno (XP: 200, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">¿Qué técnicas se pueden utilizar para mejorar la comunicación?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">3</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">1</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<main id="sociales">
+    <h2>Sociales</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 3</strong><br>
+                Rango: Alumno (XP: 400, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">¿Cuáles son las causas del cambio climático?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">2</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">0</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<main id="ingles">
+    <h2>Inglés</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 4</strong><br>
+                Rango: Alumno (XP: 300, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">¿Cuáles son las diferencias entre "there", "their" y "they're"?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">4</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">2</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<main id="ciencias">
+    <h2>Ciencias</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 5</strong><br>
+                Rango: Alumno (XP: 500, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">¿Cómo funciona la fotosíntesis?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">6</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">1</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<main id="bugs">
+    <h2>Bugs</h2>
+    <div class="post">
+        <div class="perfil">
+            <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+            <div>
+                <strong>Estudiante 6</strong><br>
+                Rango: Alumno (XP: 100, Año: 2024)
+            </div>
+        </div>
+        <div class="pregunta">He encontrado un bug en la plataforma, ¿cómo lo reporto?</div>
+        <div class="votos">
+            <div>
+                <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                <span class="like-count">1</span>
+                <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                <span class="dislike-count">0</span>
+            </div>
+            <button class="boton" onclick="toggleRespuesta(this)">Responder</button>
+        </div>
+        <div class="respuesta-input">
+            <textarea placeholder="Escribe tu respuesta..."></textarea>
+            <button class="boton" onclick="submitRespuesta(this)">Enviar</button>
+        </div>
+    </div>
+    <div class="respuestas-container"></div>
+</main>
+
+<script>
+    const userVotes = {};
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('main');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function toggleRespuesta(button) {
+        const respuestaInput = button.parentNode.nextElementSibling;
+        respuestaInput.style.display = respuestaInput.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function submitRespuesta(button) {
+        const textarea = button.previousElementSibling;
+        const respuesta = textarea.value;
+        if (respuesta.trim() === '') {
+            alert('Por favor escribe una respuesta.');
+            return;
+        }
+
+        const respuestaContainer = document.createElement('div');
+        respuestaContainer.className = 'respuesta';
+        respuestaContainer.innerHTML = `
+            <div class="perfil">
+                <img src="https://i.pinimg.com/736x/2c/f5/58/2cf558ab8c1f12b43f7326945672805e.jpg" alt="Perfil">
+                <div>
+                    <strong>Tú</strong><br>
+                    Rango: Alumno (XP: 200, Año: 2024)
+                </div>
+            </div>
+            <div class="pregunta">${respuesta}</div>
+            <div class="votos">
+                <div>
+                    <button class="boton-pequeño" onclick="vote(this, 'like')">👍</button>
+                    <span class="like-count">0</span>
+                    <button class="boton-pequeño" onclick="vote(this, 'dislike')">👎</button>
+                    <span class="dislike-count">0</span>
+                </div>
+            </div>
+        `;
+        
+        const respuestasContainer = button.closest('.post').nextElementSibling;
+        respuestasContainer.appendChild(respuestaContainer);
+        
+        // Limpiar el textarea y ocultar el campo de respuesta
+        textarea.value = '';
+        textarea.closest('.respuesta-input').style.display = 'none';
+    }
+
+    function vote(button, type) {
+        const postContainer = button.closest('.post');
+        const likeCount = postContainer.querySelector('.like-count');
+        const dislikeCount = postContainer.querySelector('.dislike-count');
+
+        const postId = postContainer.querySelector('.pregunta').innerText; 
+
+        if (!userVotes[postId]) {
+            userVotes[postId] = { liked: false, disliked: false };
+        }
+
+        if (type === 'like') {
+            if (!userVotes[postId].liked) {
+                likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                userVotes[postId].liked = true;
+                if (userVotes[postId].disliked) {
+                    dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+                    userVotes[postId].disliked = false;
+                }
+            }
+        } else {
+            if (!userVotes[postId].disliked) {
+                dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+                userVotes[postId].disliked = true;
+                if (userVotes[postId].liked) {
+                    likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                    userVotes[postId].liked = false;
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
